@@ -8,7 +8,7 @@ module Handlers
       # 'initialize' is in base
 
       def handle
-        launch_registration unless user_registered?(id: chat_id)
+        launch_registration unless student_registered?(id: chat_id)
       end
     end
   end

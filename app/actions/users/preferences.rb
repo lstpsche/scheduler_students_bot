@@ -8,25 +8,21 @@ module Actions
       # 'initialize' is in base
 
       def show
-        show_options_menu
-      end
+        params = {
+          markup_options: Constants.preferences_options
+        }
 
-      # 'back' is in base
-
-      def setup_all
-        setup_all_options
-        save_validate_user { setup_successfull }
+        super(params)
       end
 
       private
 
-      # 'option_name' is in base
+      def message_text
+        I18n.t('actions.users.preferences.show_options')
+      end
 
-      def setup_all_options
-        # setup all options one by one
-        Constants.preferences_setup_options.each do |option|
-          setup_option(option_name(option))
-        end
+      def callback(command)
+        Constants.preferences_callback % { command: command }
       end
     end
   end

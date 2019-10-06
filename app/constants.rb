@@ -47,14 +47,11 @@ class Constants
     end
 
     def preferences_options
+      student_scope = 'actions.users.student_settings'
       scope = 'actions.users.options'
 
-      options_translations_for(PREFERENCES_OPTIONS, scope)
-    end
-
-    def preferences_setup_options
-      # remove last 'option' which is actualy :back
-      preferences_options[0..-2]
+      options_translations_for(STUDENT_PREFERENCES_OPTIONS, student_scope) +
+        options_translations_for(USER_PREFERENCES_OPTIONS, scope)
     end
 
     def schedule_options
@@ -81,6 +78,10 @@ class Constants
 
     def option_callback
       "options-%{command}%{return_to}"
+    end
+
+    def preferences_callback
+      "preferences-show_%{command}"
     end
 
     def schedule_callback
@@ -112,7 +113,7 @@ class Constants
 
     def translated_weekdays
       weekdays.map do |weekday|
-        I18n.t("weekdays.#{weekday}")
+        I18n.t(weekday, scope: 'weekdays')
       end
     end
 
@@ -143,9 +144,17 @@ class Constants
       :back
     ]
 
-    PREFERENCES_OPTIONS = [
-      :example_option_1,
+    USER_PREFERENCES_OPTIONS = [
+      # TODO: add here something maybe
       :back
+    ]
+
+    STUDENT_PREFERENCES_OPTIONS = [
+      :university,
+      :faculty,
+      :course,
+      :department,
+      :group
     ]
 
     SCHEDULE_OPTIONS = [

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+
+# TODO: THIS HELPER SHOULD BE DEPRECATED
 module Helpers
   module Actions
     module UsersHelper
@@ -16,51 +18,26 @@ module Helpers
         end
       end
 
-      def send_option_message(option_name, user, markup = nil)
-        message_text = I18n.t("actions.users.options.#{option_name}.text")
+      def send_student_option_message(option_name, user, markup = nil)
+        message_text = I18n.t("actions.users.student_settings.#{option_name}.text")
         send_or_edit_message(
           message_id: user.last_message_id, text: message_text,
           markup: markup
         )
       end
 
-      def setup_successfull
+      def show_setup_successfull
         send_message(
           text: I18n.t('actions.users.preferences.setup_successful'),
           markup: 'remove'
         )
       end
 
-      def show_successfully_setup
+      def show_option_successfully_setup
         send_message(
           text: I18n.t('actions.users.options.setup_successful'),
           markup: 'remove'
         )
-      end
-
-      def show_options_menu
-        options_kb = options_menu_inline_buttons
-
-        markup = Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: options_kb)
-
-        send_or_edit_message(
-          message_id: user.last_message_id, text: I18n.t('actions.users.preferences.show_options'),
-          markup: markup
-        )
-      end
-
-      def options_menu_inline_buttons(context: nil)
-        options_kb = []
-
-        Constants.preferences_options.each do |option|
-          text = option[:button]
-          callback = "preferences-show_#{option[:name]}" + ((context.nil? || context.strip.empty?) ? '' : "-#{context}")
-          options_kb << Telegram::Bot::Types::InlineKeyboardButton.new(
-            text: text, callback_data: callback
-          )
-        end
-
-        options_kb
       end
     end
   end

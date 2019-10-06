@@ -4,7 +4,7 @@ module Actions
   module Users
     class Registration < Base
       # attrs from base -- :bot, :chat_id, :user
-      attr_reader :tg_user
+      attr_reader :tg_user, :student_settings
 
       def initialize(bot:, tg_user:)
         @bot = bot
@@ -13,15 +13,20 @@ module Actions
       end
 
       def show
-        @user = DB.create_user(tg_user: tg_user)
+        if user_registered?(id: chat_id)
+          @user = User.find_by(id: chat_id)
+        else
+          @user = DB.create_user(tg_user: tg_user)
+        end
+
+        @student_settings = DB.create_student_settings(user: user)
 
         send_message(text: message_text)
 
-        setup_all_preferences
+        setup_student_settings
+        # TODO: replace this menu showing with "Add schedule" menu
         show_main_menu
       end
-
-      alias :launch :show
 
       # Registration has no 'back' button
       def back

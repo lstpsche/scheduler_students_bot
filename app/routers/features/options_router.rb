@@ -28,7 +28,7 @@ module Routers
       end
 
       def setup(option_name)
-        setup_option(option_name)
+        setup_student_option(option_name)
 
         set_replace_last_false
         show_option(option_name)

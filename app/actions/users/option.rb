@@ -23,9 +23,8 @@ module Actions
 
       private
 
-      def before_show(options = {})
-        scope = 'actions.users.options'
-        @option = I18n.t(options.fetch(:option), scope: scope)
+      def before_show(params = {})
+        @option = Constants.preferences_options.select { |opt| opt[:name] == params[:option] }.first
       end
 
       def after_show(*args)
@@ -45,15 +44,9 @@ module Actions
       # 'option_name' is in base
 
       def message_text
-        user_option = user&.send(option_name(@option))
+        user_option_text = user_option_text(option_name(option))
 
-        user_option_text = if user_option
-          "_Current state:_ " + user_option
-        else
-          'This setting was not set for you yet.'
-        end
-
-        "*#{option_button(@option)}*\n#{user_option_text}"
+        "*#{option_button(option)}*\n#{user_option_text}"
       end
     end
   end

@@ -35,5 +35,14 @@ class DB
         schedule_id: args[:schedule_id]
       )
     end
+
+    def create_student_settings(user:)
+      StudentSettings.create(
+        user: user,
+        university: '',
+        faculty: '',
+        course: 1
+      )
+    end
   end
 end

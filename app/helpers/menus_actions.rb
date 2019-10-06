@@ -3,7 +3,7 @@
 module Helpers
   module MenusActions
     def launch_registration
-      ::Actions::Users::Registration.new(bot: bot, tg_user: user).launch
+      ::Actions::Users::Registration.new(bot: bot, tg_user: user).show
     end
 
     ################# Main Menu ####################################
@@ -56,8 +56,8 @@ module Helpers
 
     ################# Preferences ##################################
 
-    def setup_all_preferences
-      ::Actions::Users::Preferences.new(bot: bot, user: user).setup_all
+    def setup_student_settings
+      ::Services::StudentOptionSetupService.new(bot: bot, user: user).setup_all
     end
 
     def show_option(option_name)
@@ -66,8 +66,8 @@ module Helpers
 
     ################# Options ######################################
 
-    def setup_option(option_name)
-      ::Services::OptionSetupService.new(bot: bot, user: user).perform(option_name)
+    def setup_student_option(option_name)
+      ::Services::StudentOptionSetupService.new(bot: bot, user: user).setup_option(option_name)
     end
 
     def call_back_option
