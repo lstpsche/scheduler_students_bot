@@ -2,12 +2,16 @@
 
 class DB
   class << self
+
+    # TODO: refactor all those arguments
+    # TODO: replace .fetch(..., '') with [:...] || ''
+
     def create_user(args)
       tg_user = args.fetch(:tg_user, nil)
       return false unless tg_user || args.fetch(:id, nil)
 
       User.create(
-        id: tg_user.id || args[:id],
+        id: tg_user.id,
         first_name: tg_user&.first_name || args.fetch(:first_name, ''),
         last_name: tg_user&.last_name || args.fetch(:last_name, ''),
         username: tg_user&.username || args.fetch(:username, ''),
@@ -15,7 +19,21 @@ class DB
       )
     end
 
-    # TEMPLATE_TODO: add here db helpers for your new models
-    # example: create_schedule(args)
+    def create_schedule(args)
+      Schedule.create(
+        name: args[:name],
+        additional_info: args[:additional_info] || ''
+      )
+    end
+
+    def create_event(args)
+      Event.create(
+        weekday: args[:weekday],
+        time: args[:time],
+        info: args[:info],
+        additional_info: args[:additional_info] || '',
+        schedule_id: args[:schedule_id]
+      )
+    end
   end
 end

@@ -7,7 +7,7 @@ module Handlers
       include Helpers::MenusActions
       include Helpers::TalkerActions
 
-      attr_reader :bot, :chat_id, :user
+      attr_reader :bot, :chat_id, :user, :talker
 
       def initialize(bot:, user:)
         @bot = bot

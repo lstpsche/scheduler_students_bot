@@ -2,14 +2,14 @@
 
 module Routers
   module Messages
-    class TextCommandsRouter < Routers::Base
+    class TextCommandsRouter < Base
       # attrs from base -- :bot, :chat_id, :user
       attr_reader :command, :tg_user
 
       HANDLERS = {
         'start' => Handlers::TextCommands::StartHandler,
+        'menu' => Handlers::TextCommands::MenuHandler,
         'help' => Handlers::TextCommands::HelpHandler
-        # TEMPLATE_TODO: add here your text commands handlers
       }
 
       # 'initialize' is in base

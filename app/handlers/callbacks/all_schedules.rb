@@ -2,13 +2,20 @@
 
 module Handlers
   module Callbacks
-    class Preferences < Base
+    class AllSchedules < Base
       # attrs from base -- :bot, :chat_id, :user, :talker
 
       # 'initialize' is in base
 
       def handle(command)
-        Routers::Features::OptionsRouter.new(bot: bot, user: user).route(command)
+        back && return if command == 'back'
+
+        schedule_id = command.to_i
+        show_schedule(schedule_id)
+      end
+
+      def back
+        call_back_all_schedules
       end
     end
   end

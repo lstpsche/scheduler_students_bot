@@ -3,6 +3,7 @@
 class User < ActiveRecord::Base
   serialize :context, ::Serializers::HashSerializer
   store_accessor :context, :last_message, :replace_last_message, :return_to
+  has_one :student_settings
   has_many :schedule_users
   has_many :schedules, through: :schedule_users
 

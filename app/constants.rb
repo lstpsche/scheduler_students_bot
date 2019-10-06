@@ -3,7 +3,6 @@
 class Constants
   class << self
     # REGEXES
-
     def command_regex
       /^\/(\w+)$/
     end
@@ -12,7 +11,34 @@ class Constants
       /^(\w+)-(\w+)(-(\w+))?$/
     end
 
+    def set_schedule_name_full_layout
+      /(.+)--(.+)/
+    end
+
+    def set_schedule_name_layout_without_add_info
+      /(.+)/
+    end
+
+    # TODO: remove whitespaces around --
+    def day_event_full_layout
+      /^(\d+:\d+) (.+) -- (.+)$/
+    end
+
+    def day_event_layout_without_add_info
+      /^(\d+:\d+) (.+)$/
+    end
+
+    def event_in_schedule_decoration
+      "*%{time}*: %{info} _(%{additional_info})_"
+    end
+
     # OPTIONS
+
+    def in_schedule_options
+      scope = 'actions.features.schedules.schedule.options'
+
+      options_translations_for(IN_SCHEDULE_OPTIONS, scope)
+    end
 
     def option_options
       scope = 'actions.users.option'
@@ -31,16 +57,16 @@ class Constants
       preferences_options[0..-2]
     end
 
+    def schedule_options
+      scope = 'actions.features.schedules.schedule.options'
+
+      options_translations_for(SCHEDULE_OPTIONS, scope)
+    end
+
     def menu_options
       scope = 'actions.features.menu'
 
       options_translations_for(MENU_OPTIONS, scope)
-    end
-
-    # TEMPLATE_TODO: add options for your features menus
-    # for example:
-    def subfeature_1_options
-      ['one', 'two', 3, 4]
     end
 
     # CALLBACKS
@@ -49,14 +75,17 @@ class Constants
       "menu-%{command}%{return_to}"
     end
 
+    def all_schedules_callback
+      "schedules-%{command}%{return_to}"
+    end
+
     def option_callback
       "options-%{command}%{return_to}"
     end
 
-    # TEMPLATE_TODO: add your menu buttons callbacks here
-    # for example:
-    def subfeature_1_callback
-      "subfeature_1-%{command}%{return_to}"
+    def schedule_callback
+      # command MUST be like "#{schedule_id}__#{action}
+      "schedule-%{command}%{return_to}"
     end
 
     # using for inner coding. no need to translate
@@ -64,9 +93,27 @@ class Constants
     def text_commands
       [
         '/start',
+        '/menu',
         '/help'
-        # TEMPLATE_TODO: add your custom common commands here
       ]
+    end
+
+    def weekdays
+      [
+        'monday',
+        'tuesday',
+        'wednesday',
+        'thursday',
+        'friday',
+        'saturday',
+        'sunday'
+      ]
+    end
+
+    def translated_weekdays
+      weekdays.map do |weekday|
+        I18n.t("weekdays.#{weekday}")
+      end
     end
 
     private
@@ -80,9 +127,15 @@ class Constants
 
     # OPTIONS LISTS
 
+    IN_SCHEDULE_OPTIONS = [
+      :hide,
+      :pin,
+      :back
+    ]
+
     MENU_OPTIONS = [
+      :all_schedules,
       :preferences
-      # TEMPLATE_TODO: add Main Menu options here
     ]
 
     OPTION_OPTIONS = [
@@ -92,7 +145,11 @@ class Constants
 
     PREFERENCES_OPTIONS = [
       :example_option_1,
-      # TEMPLATE_TODO: add custom user preferences here
+      :back
+    ]
+
+    SCHEDULE_OPTIONS = [
+      :show,
       :back
     ]
   end

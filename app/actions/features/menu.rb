@@ -6,15 +6,7 @@ module Actions
       # attrs from base -- :bot, :chat_id, :user
 
       # 'initialize' is in base
-      # 'show' is in base
-
-      def show
-        params = {
-          markup_options: Constants.menu_options
-        }
-
-        super(params)
-      end
+      # 'show' method is in base
 
       # there is no 'back' in Main Menu
       def back
@@ -22,10 +14,6 @@ module Actions
       end
 
       private
-
-      def after_show(*args)
-        set_replace_last_true
-      end
 
       def callback(command)
         Constants.main_menu_callback % {
@@ -35,7 +23,10 @@ module Actions
       end
 
       # create_button is in base
-      # create_markup is in base
+
+      def create_markup
+        super(Constants.menu_options)
+      end
 
       def message_text
         I18n.t('actions.features.menu.header')

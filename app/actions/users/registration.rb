@@ -12,10 +12,14 @@ module Actions
         @chat_id = tg_user.id
       end
 
-      # TEMPLATE_TODO: you can override 'show' method to do, what you want registration to do
-      # pay attention to 'before_show' and 'after_show' methods
+      def show
+        @user = DB.create_user(tg_user: tg_user)
 
-      # 'show' is in base
+        send_message(text: message_text)
+
+        setup_all_preferences
+        show_main_menu
+      end
 
       alias :launch :show
 
@@ -25,16 +29,6 @@ module Actions
       end
 
       private
-
-      def before_show(*args)
-        @user = DB.create_user(tg_user: tg_user)
-        set_replace_last_false
-      end
-
-      def after_show(*args)
-        setup_all_preferences
-        show_main_menu
-      end
 
       def message_text
         I18n.t('actions.users.registration.welcome') % { name: user.first_name }

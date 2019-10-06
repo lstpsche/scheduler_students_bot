@@ -2,15 +2,16 @@
 
 module Routers
   module Messages
-    class CallbacksRouter < Routers::Base
+    class CallbacksRouter < Base
       # attrs from base -- :bot, :chat_id, :user
       attr_reader :params
 
       HANDLERS = {
         'menu' => Handlers::Callbacks::Menu,
+        'schedules' => Handlers::Callbacks::AllSchedules,
         'options' => Handlers::Callbacks::Options,
-        'preferences' => Handlers::Callbacks::Preferences
-        # TEMPLATE_TODO: Add your handlers here
+        'preferences' => Handlers::Callbacks::Preferences,
+        'schedule' => Handlers::Callbacks::Schedule
       }
 
       def initialize(bot:)
@@ -49,7 +50,6 @@ module Routers
         HANDLERS[params[:handler_class]].new(bot: bot, user: user).handle(params[:command])
       end
 
-      # Almost deprecated
       def return_to_context
         case params[:return_to]
         when 'options_menu'

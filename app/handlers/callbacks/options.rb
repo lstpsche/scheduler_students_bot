@@ -3,7 +3,7 @@
 module Handlers
   module Callbacks
     class Options < Base
-      # attrs from base -- :bot, :chat_id, :user
+      # attrs from base -- :bot, :chat_id, :user, :talker
 
       # 'initialize' is in base
 

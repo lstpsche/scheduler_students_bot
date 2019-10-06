@@ -7,7 +7,11 @@ module Handlers
 
       # 'initialize' is in base
 
-      # TEMPLATE_TODO: add here methods to use them in 'handle' down below
+      def show_all_schedules_menu
+        return false if not_registered_user(id: chat_id)
+
+        show_all_schedules
+      end
 
       def show_preferences_menu
         return false if not_registered_user(id: chat_id)
@@ -17,9 +21,10 @@ module Handlers
 
       def handle(command)
         case command
+        when 'all_schedules'
+          show_all_schedules_menu
         when 'preferences'
           show_preferences_menu
-        # TEMPLATE_TODO: add here your callbacks routes
         end
       end
 
