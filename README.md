@@ -1,4 +1,4 @@
-# Telegram Bot Template on Plain Ol' Ruby
+# Scheduler Students Telegram Bot
 
 Group chats are **not supported**!
 
