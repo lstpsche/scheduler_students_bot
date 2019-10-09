@@ -15,6 +15,12 @@ en:
           create_new_schedule:
             name: create_schedule
             button: + Create new schedule
+          create_new:
+            name: create
+            button: '+ Create new schedule'
+          back:
+            name: back
+            button: <-- Back
         all_schedules:
           header: All schedules
           add_schedule:
@@ -99,4 +105,4 @@ en:
     no_command: "There's no such command.\nYou can use /help to view available text commands."
     not_registered: "Sorry, you're not registered yet.\nPlease, run /start to register."
     not_understand: "Sorry, I don't understand.\nYou can use /help to view available text commands."
-    something_wrong: "Sorry, something's gone wrong.\nPlease, try again."
+    something_wrong: "Sorry, something's gone wrong."

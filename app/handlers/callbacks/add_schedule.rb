@@ -8,18 +8,28 @@ module Handlers
 
       # 'initialize' is in base
 
-      def handle(schedule_id)
-        @schedule = ::Schedule.find_by(id: schedule_id)
-
-        check_schedule_validity
-        add_schedule_to_user
-        show_all_schedules
+      def handle(command)
+        case command
+        when 'create'
+          create_schedule_action
+        when 'back'
+          show_all_schedules && return
+        else
+          @schedule = ::Schedule.find_by(id: schedule_id)
+          check_schedule_validity
+          add_schedule_to_user
+          show_all_schedules
+        end
       end
 
       private
 
       def add_schedule_to_user
-        Services::Schedules::AddScheduleToUserService.new(bot: bot, user: user, schedule: schedule).perform
+        Services::Schedules::ScheduleUserInteraction.new(bot: bot, user: user, schedule: schedule).perform
+      end
+
+      def create_schedule_action
+        Services::Schedules::ScheduleUserInteraction.new(bot: bot, user: user).create_new
       end
 
       def check_schedule_validity

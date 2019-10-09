@@ -21,7 +21,15 @@ module Actions
         end
 
         def create_markup
-          super(schedules)
+          super(schedules) do
+            back = I18n.t('actions.features.schedules.add_schedule.back')
+            create = I18n.t('actions.features.schedules.add_schedule.create_new')
+
+            [
+              create_button(create[:button], create[:name]),
+              create_button(back[:button], back[:name])
+            ]
+          end
         end
 
         def message_text
