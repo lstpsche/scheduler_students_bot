@@ -13,8 +13,12 @@ module Actions
         @bot = bot
         @user = user
         @chat_id = user.id
+        # TODO: REMOVE ALL THOSE UNNEEDED YIELDS
+        yield if block_given?
       end
 
+      # TODO: refactor this 'show' (AND ALL OTHERS NOT REFACTORED 'show's)
+      # to be with params
       def show
         markup = create_markup
         text = message_text
@@ -24,6 +28,7 @@ module Actions
       end
 
       def back
+        # TODO: refactor ALL CODE -- setting of replace last should be ONLY AFTER ACTION
         set_replace_last_true
         show_main_menu
       end
@@ -46,12 +51,12 @@ module Actions
         options.each do |option|
           kb << create_button(option_button(option), option_name(option))
         end
-        additional_buttons = yield if block_given?
-        kb += additional_buttons unless additional_buttons.nil?
+        kb += Array.wrap(yield) if block_given?
 
         Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
       end
 
+      # TODO: rename ALL 'option_button' to 'option_text' THROUGH ALL THE CODE
       def option_button(option)
         option[:button]
       end

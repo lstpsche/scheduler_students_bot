@@ -20,7 +20,11 @@ module Helpers
       ::Actions::Users::Preferences.new(bot: bot, user: user).show
     end
 
-    ################# My Schedules #################################
+    ################# All Schedules #################################
+
+    def show_add_schedule
+      ::Actions::Features::Schedules::AddSchedule.new(bot: bot, user: user).show
+    end
 
     def show_schedule(schedule_id)
       ::Actions::Features::Schedules::Schedule.new(bot: bot, user: user).show(schedule_id: schedule_id)

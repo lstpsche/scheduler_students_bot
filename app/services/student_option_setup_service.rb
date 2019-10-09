@@ -3,7 +3,7 @@
 module Services
   class StudentOptionSetupService < Base
     include Helpers::Actions::UsersHelper
-    include Helpers::Actions::OptionsSetups
+    include Helpers::Actions::OptionSetupHelper
 
     # attrs from base -- :bot, :chat_id, :talker, :user
     attr_reader :response, :settings

@@ -7,11 +7,12 @@ module Routers
       attr_reader :params
 
       HANDLERS = {
+        'add_schedule' => Handlers::Callbacks::AddSchedule,
         'menu' => Handlers::Callbacks::Menu,
-        'schedules' => Handlers::Callbacks::AllSchedules,
         'options' => Handlers::Callbacks::Options,
         'preferences' => Handlers::Callbacks::Preferences,
-        'schedule' => Handlers::Callbacks::Schedule
+        'schedule' => Handlers::Callbacks::Schedule,
+        'schedules' => Handlers::Callbacks::AllSchedules
       }
 
       def initialize(bot:)

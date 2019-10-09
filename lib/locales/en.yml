@@ -10,6 +10,11 @@ en:
           name: preferences
           button: Preferences
       schedules:
+        add_schedule:
+          header: Available schedules
+          create_new_schedule:
+            name: create_schedule
+            button: + Create new schedule
         all_schedules:
           header: All schedules
           add_schedule:

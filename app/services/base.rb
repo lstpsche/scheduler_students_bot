@@ -10,8 +10,8 @@ module Services
 
     def initialize(bot:, user:)
       @bot = bot
-      @user = user
       @chat_id = user.id
+      @user = user
       yield if block_given?
     end
   end

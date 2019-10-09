@@ -68,25 +68,31 @@ class Constants
 
     # CALLBACKS
 
-    def main_menu_callback
-      "menu-%{command}%{return_to}"
+    def add_schedule_callback
+      'add_schedule-%{schedule_id}'
     end
 
+    # TODO: replace 'command' with 'schedule_id' (or any other word, that MAKES SENSE)
+
     def all_schedules_callback
-      "schedules-%{command}%{return_to}"
+      'schedules-%{command}%{return_to}'
+    end
+
+    def main_menu_callback
+      'menu-%{command}%{return_to}'
     end
 
     def option_callback
-      "options-%{command}%{return_to}"
+      'options-%{command}%{return_to}'
     end
 
     def preferences_callback
-      "preferences-show_%{command}"
+      'preferences-show_%{command}'
     end
 
     def schedule_callback
-      # command MUST be like "#{schedule_id}__#{action}
-      "schedule-%{command}%{return_to}"
+      # TODO: command MUST be like "#{schedule_id}__#{action}
+      'schedule-%{command}%{return_to}'
     end
 
     # using for inner coding. no need to translate

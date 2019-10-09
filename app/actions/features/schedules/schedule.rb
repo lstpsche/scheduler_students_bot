@@ -17,6 +17,7 @@ module Actions
           super()
         end
 
+        # TODO: DO NOT EXPAND IF SCHEDULE HAS NO EVENTS
         def expand(schedule_id:)
           @schedule = ::Schedule.find_by(id: schedule_id)
           @expand = true
@@ -47,6 +48,7 @@ module Actions
 
         # create_button is in base
 
+        # TODO: DO NOT SHOW EXPAND BUTTON IF THERE ARE NO EVENTS IN SCHEDULE
         def create_markup
           super(expand? ? Constants.in_schedule_options : Constants.schedule_options)
         end

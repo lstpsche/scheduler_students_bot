@@ -2,7 +2,7 @@
 
 module Helpers
   module Actions
-    module OptionsSetups
+    module OptionSetupHelper
       def setup_example_option_1
         setup('example_option_1')
       end
