@@ -47,6 +47,10 @@ module Helpers
       talker.show_bad_input
     end
 
+    def show_invalid_schedule
+      talker.show_invalid_schedule
+    end
+
     def show_no_command
       talker.show_no_command
     end

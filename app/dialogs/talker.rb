@@ -54,6 +54,11 @@ class Talker
     set_replace_last_false
   end
 
+  def show_invalid_schedule
+    send_message(text: I18n.t('errors.invalid_schedule'))
+    set_replace_last_false
+  end
+
   def show_no_command
     send_message(text: I18n.t('errors.no_command'))
     set_replace_last_false

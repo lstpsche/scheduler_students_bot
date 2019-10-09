@@ -15,12 +15,14 @@ module Services
       case error
       when 'Bad input'
         show_bad_input
-      when 'Not understand'
-        show_not_understand
+      when 'Invalid schedule_id'
+        show_invalid_schedule
       when 'No command'
         show_no_command
       when 'Not registered'
         show_not_registered
+      when 'Not understand'
+        show_not_understand
       else
         show_something_wrong
       end

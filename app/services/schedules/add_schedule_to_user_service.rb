@@ -6,9 +6,9 @@ module Services
       # attrs from base -- :bot, :chat_id, :user
       attr_reader :schedule
 
-      def initialize(bot:, user:, schedule_id:)
+      def initialize(bot:, user:, schedule:)
         super(bot: bot, user: user)
-        @schedule = Schedule.find_by(id: schedule_id)
+        @schedule = schedule
       end
 
       def perform
