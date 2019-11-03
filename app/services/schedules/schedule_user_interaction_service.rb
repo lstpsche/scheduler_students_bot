@@ -16,16 +16,10 @@ module Services
         user.save
       end
 
-      # TODO: DO NOT KNOW YET WHERE WILL USE THIS
-      # MAYBE THIS WILL BE AT WEB VERSION
-      # well, yes, this should be at web ver.
+      # this, probably, should be at web ver.
       def edit_schedule
         user.schedules.where(id: schedule.id).first = schedule.clone.update(custom: true, customed_by: user.id)
         user.save
-      end
-
-      def create_new
-        send_message(text: 'There will be a link for creating of a new schedule at web-version.')
       end
     end
   end

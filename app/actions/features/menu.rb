@@ -8,32 +8,31 @@ module Actions
       # 'initialize' is in base
       # 'show' method is in base
 
-      # there is no 'back' in Main Menu
-      def back
-        raise NoMethodError
+      def show
+        params = {
+          markup_options: Constants.menu_options
+        }
+
+        super(params)
       end
 
       private
 
       def callback(command)
         Constants.main_menu_callback % {
-          command: command,
-          return_to: nil
+          command: command
         }
       end
 
-      # create_button is in base
-
-      def create_markup
-        super(Constants.menu_options)
-      end
+      # 'create_button' is in base
+      # 'create_markup' is in base
 
       def message_text
         I18n.t('actions.features.menu.header')
       end
 
-      # option_button is in base
-      # option_name is in base
+      # 'option_button_text' is in base
+      # 'option_name' is in base
     end
   end
 end

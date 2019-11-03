@@ -15,14 +15,18 @@ module Actions
         super(params)
       end
 
+      def back
+        show_main_menu
+      end
+
       private
+
+      def callback(option_name)
+        Constants.preferences_callback % { option_name: option_name }
+      end
 
       def message_text
         I18n.t('actions.users.preferences.show_options')
-      end
-
-      def callback(command)
-        Constants.preferences_callback % { command: command }
       end
     end
   end

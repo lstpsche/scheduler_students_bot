@@ -8,24 +8,7 @@ class Constants
     end
 
     def context_command_regex
-      /^(\w+)-(\w+)(-(\w+))?$/
-    end
-
-    def set_schedule_name_full_layout
-      /(.+)--(.+)/
-    end
-
-    def set_schedule_name_layout_without_add_info
-      /(.+)/
-    end
-
-    # TODO: remove whitespaces around --
-    def day_event_full_layout
-      /^(\d+:\d+) (.+) -- (.+)$/
-    end
-
-    def day_event_layout_without_add_info
-      /^(\d+:\d+) (.+)$/
+      /^(\w+)-(\w+)?$/
     end
 
     def event_in_schedule_decoration
@@ -72,27 +55,24 @@ class Constants
       'add_schedule-%{schedule_id}'
     end
 
-    # TODO: replace 'command' with 'schedule_id' (or any other word, that MAKES SENSE)
-
     def all_schedules_callback
-      'schedules-%{command}%{return_to}'
+      'schedules-%{command}'
     end
 
     def main_menu_callback
-      'menu-%{command}%{return_to}'
+      'menu-%{command}'
     end
 
     def option_callback
-      'options-%{command}%{return_to}'
+      'options-%{option_name}__%{action}'
     end
 
     def preferences_callback
-      'preferences-show_%{command}'
+      'preferences-%{option_name}__show'
     end
 
     def schedule_callback
-      # TODO: command MUST be like "#{schedule_id}__#{action}
-      'schedule-%{command}%{return_to}'
+      'schedule-%{schedule_id}__%{action}'
     end
 
     # using for inner coding. no need to translate
@@ -151,7 +131,6 @@ class Constants
     ]
 
     USER_PREFERENCES_OPTIONS = [
-      # TODO: add here something maybe
       :back
     ]
 

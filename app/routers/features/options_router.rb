@@ -13,7 +13,7 @@ module Routers
       end
 
       def route(command)
-        action, option_name = command.split('_', 2)
+        option_name, action = command.split('__')
 
         case action
         when 'show'
@@ -29,8 +29,6 @@ module Routers
 
       def setup(option_name)
         setup_student_option(option_name)
-
-        set_replace_last_false
         show_option(option_name)
       end
 

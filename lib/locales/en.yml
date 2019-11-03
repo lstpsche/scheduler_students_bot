@@ -5,87 +5,95 @@ en:
         header: Main menu
         all_schedules:
           name: all_schedules
-          button: Schedules
+          button_text: Schedules
         preferences:
           name: preferences
-          button: Preferences
+          button_text: Preferences
       schedules:
         add_schedule:
+          no_schedules_header: "You have no schedules available to add\nNevertheless, you can create new schedule"
           header: Available schedules
           create_new_schedule:
             name: create_schedule
-            button: + Create new schedule
+            button_text: + Create new schedule
           create_new:
             name: create
-            button: '+ Create new schedule'
+            button_text: '+ Create new schedule'
           back:
             name: back
-            button: <-- Back
+            button_text: <-- Back
         all_schedules:
           header: All schedules
           add_schedule:
             name: add_schedule
-            button: + Add schedule
+            button_text: + Add schedule
           back:
             name: back
-            button: <-- Back
+            button_text: <-- Back
+        create_schedule:
+          header: By pressing this button you will be redirected to a new schedule creation at web-version of Scheduler
         schedule:
           options:
             show:
               name: expand
-              button: Show schedule
+              button_text: Show schedule
             hide:
               name: hide
-              button: Hide schedule
+              button_text: Hide schedule
             pin:
               name: pin
-              button: Pin
+              button_text: Pin
             back:
               name: back
-              button: <-- Back
+              button_text: <-- Back
     users:
       option:
+        user_option_text:
+          not_present: This setting was not set for you yet
+          present: "_Current:_ %{option_value}"
+        message_text: "*%{button_text}*\n%{user_option_text}"
         change_option:
           name: setup
-          button: Change option
+          button_text: Change option
         back:
           name: back
-          button: <-- Back
+          button_text: <-- Back
       options:
         back:
           name: back
-          button: <-- Back
+          button_text: <-- Back
         example_option_1:
           name: example_option_1
-          button: Example Option 1
+          button_text: Example Option 1
           text: This is test method. What do you think?
         setup_successful: Setting was set up successfully!
       preferences:
         show_options: 'Choose a setting to setup:'
-        setup_successful: "Everything's set up.\nYou're ready to go!"
+        setup_successful: "Everything's set up\nYou're ready to go!"
       registration:
         terms_and_conditions: "We will use some of your Telegram profile data.\n\nHere's a list of what we will use:\n1. First name\n2. Last name\n3. Username\n4. Telegram ID\n5. Info about your language.\n\nNothing of your personal data will be given to third parties. All your data is stored at ours servers and only used by us."
-        welcome: "Nice to meet you, %{name}.\nPlease, answer some questions."
+        welcome: "Nice to see you here, %{name}\nPlease, answer some questions"
+        available_schedules: "There are some schedules based on your info.\nYou can tap on any of them to add it to your account"
       student_settings:
         university:
           name: university
-          button: University
+          button_text: University
           text: What's your University?
         faculty:
           name: faculty
-          button: Faculty
+          button_text: Faculty
           text: What's your Faculty?
         course:
           name: course
-          button: Course
+          button_text: Course
           text: What's your Course?
         department:
           name: department
-          button: Department
+          button_text: Department
           text: What's your Department number?
         group:
           name: group
-          button: Group
+          button_text: Group
           text: What's your Group?
   common:
     help: "/menu - show main menu\n/help - show this message"
@@ -100,9 +108,16 @@ en:
     saturday: saturday
     sunday: sunday
   errors:
-    bad_input: Please, be more serious.
-    invalid_schedule: Sorry, the schedule you've chosen does not exist.
-    no_command: "There's no such command.\nYou can use /help to view available text commands."
-    not_registered: "Sorry, you're not registered yet.\nPlease, run /start to register."
-    not_understand: "Sorry, I don't understand.\nYou can use /help to view available text commands."
-    something_wrong: "Sorry, something's gone wrong."
+    bad_input: Please, be more serious
+    invalid_schedule: Sorry, the schedule you've chosen does not exist
+    no_command: "There's no such command.\nYou can use /help to view available text commands"
+    not_registered: "Sorry, you're not registered yet.\nPlease, run /start to register"
+    not_understand: "Sorry, I don't understand.\nYou can use /help to view available text commands"
+    something_wrong: Sorry, something's gone wrong
+    student_settings:
+      not_valid_input:
+        university: "University name is not valid\nPlease, re-check and enter again"
+        faculty: "Faculty name is not valid\nPlease, re-check and enter again"
+        course: "Course number is not valid\nPlease, re-check and enter again"
+        department: "Department number is not valid\nPlease, re-check and enter again"
+        group: "Group number is not valid\nPlease, re-check and enter again"

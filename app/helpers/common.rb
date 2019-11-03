@@ -2,20 +2,27 @@
 
 module Helpers
   module Common
-    def set_replace_last_true
-      user&.update(replace_last_message: true)
-    end
-
-    def set_replace_last_false
-      user&.update(replace_last_message: false)
-    end
+    private
 
     def get_user(user = nil, chat_id: nil, fallback_user: nil)
       @user || user || User.find_by(id: chat_id) || fallback_user
     end
 
-    def user_registered?(id:)
-      User.registered?(id: id)
+    def message_data_from(message)
+      case message
+      when Telegram::Bot::Types::Message
+        return message.text
+      when Telegram::Bot::Types::CallbackQuery
+        return message.data
+      end
+    end
+
+    def presence(value)
+      value.present? ? value : false
+    end
+
+    def reset_user_tapped_message
+      user&.update(tapped_message: nil)
     end
 
     def student_registered?(id:)
@@ -27,13 +34,15 @@ module Helpers
     end
 
     def user_option_text(option_name)
-      option = user_option(option_name)
-
       if option.present?
-        '_Current:_ ' + option
+        I18n.t('actions.users.option.user_option_text.present', option_value: user_option(option_name))
       else
-        'This setting was not set for you yet.'
+        I18n.t('actions.users.option.user_option_text.not_present')
       end
+    end
+
+    def user_registered?(id:)
+      User.registered?(id: id)
     end
   end
 end

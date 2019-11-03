@@ -12,31 +12,27 @@ module Actions
         @chat_id = tg_user.id
       end
 
-      def show
-        if user_registered?(id: chat_id)
-          @user = User.find_by(id: chat_id)
-        else
-          @user = DB.create_user(tg_user: tg_user)
-        end
-
-        @student_settings = DB.create_student_settings(user: user)
-
-        send_message(text: message_text)
-
-        setup_student_settings
-        # TODO: replace this menu showing with "Add schedule" menu
-        show_main_menu
-      end
-
-      # Registration has no 'back' button
-      def back
-        raise NoMethodError
-      end
+      # 'show' is in base
 
       private
 
+      def before_show(*args)
+        @user = user_registered?(id: chat_id) ? User.find_by(id: chat_id) : DB.create_user(tg_user: tg_user)
+        @student_settings = DB.create_student_settings(user: user)
+        reset_user_tapped_message
+      end
+
+      def after_show(*args)
+        setup_student_settings
+        show_add_schedule(no_back: true, message_text: I18n.t('actions.users.registration.available_schedules'))
+      end
+
+      def create_markup(*args)
+        nil
+      end
+
       def message_text
-        I18n.t('actions.users.registration.welcome') % { name: user.first_name }
+        I18n.t('actions.users.registration.welcome', name: user.first_name)
       end
     end
   end

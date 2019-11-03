@@ -4,7 +4,7 @@ module Routers
   module Messages
     class CallbacksRouter < Base
       # attrs from base -- :bot, :chat_id, :user
-      attr_reader :params
+      attr_reader :params, :tapped_message
 
       HANDLERS = {
         'add_schedule' => Handlers::Callbacks::AddSchedule,
@@ -24,11 +24,15 @@ module Routers
       def route(callback)
         init_vars(callback)
 
+        update_user_tapped_message
         call_handler
-        return_to_context
       end
 
       private
+
+      def call_handler
+        HANDLERS[params[:handler_class]].new(bot: bot, user: user).handle(params[:command])
+      end
 
       def init_vars(callback)
         @user_id = callback.from.id
@@ -39,25 +43,15 @@ module Routers
       end
 
       def parse_callback(command)
-        # /^(\w+)-(\w+)(-(\w+))?$/
+        # /^(\w+)-(\w+)?$/
         parsed_command = command.match(Constants.context_command_regex)
 
         params[:handler_class] = parsed_command[1]
         params[:command] = parsed_command[2]
-        params[:return_to] = parsed_command[4]
       end
 
-      def call_handler
-        HANDLERS[params[:handler_class]].new(bot: bot, user: user).handle(params[:command])
-      end
-
-      def return_to_context
-        case params[:return_to]
-        when 'options_menu'
-          show_preferences
-        when 'main_menu'
-          show_main_menu
-        end
+      def update_user_tapped_message
+        user.update(tapped_message: tapped_message)
       end
     end
   end

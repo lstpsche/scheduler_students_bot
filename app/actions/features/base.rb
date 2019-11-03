@@ -2,68 +2,26 @@
 
 module Actions
   module Features
-    class Base
-      include Helpers::Common
-      include Helpers::TalkerActions
-      include Helpers::MenusActions
+    class Base < Actions::Base
+      # 'Common' module is in base
+      # 'TalkerActions' module is in base
+      # 'MenusActions' module is in base
 
-      attr_reader :bot, :chat_id, :user
+      # attrs from base -- :bot, :chat_id, :user
 
-      def initialize(bot:, user:)
-        @bot = bot
-        @user = user
-        @chat_id = user.id
-        # TODO: REMOVE ALL THOSE UNNEEDED YIELDS
-        yield if block_given?
-      end
+      # 'initialize' is in base
+      # 'show' is in base
+      # 'back' mock is in base
 
-      # TODO: refactor this 'show' (AND ALL OTHERS NOT REFACTORED 'show's)
-      # to be with params
-      def show
-        markup = create_markup
-        text = message_text
+      # 'create_button' is in base
+      # 'create_markup' is in base
+      # 'option_button_text' is in base
+      # 'option_name' is in base
 
-        send_or_edit_message(message_id: user.last_message_id, text: text, markup: markup)
-        set_replace_last_true
-      end
-
-      def back
-        # TODO: refactor ALL CODE -- setting of replace last should be ONLY AFTER ACTION
-        set_replace_last_true
-        show_main_menu
-      end
-
-      private
-
-      def callback(command)
-        command
-      end
-
-      def create_button(text, command)
-        Telegram::Bot::Types::InlineKeyboardButton.new(
-          text: text,
-          callback_data: callback(command)
-        )
-      end
-
-      def create_markup(options = [])
-        kb = []
-        options.each do |option|
-          kb << create_button(option_button(option), option_name(option))
-        end
-        kb += Array.wrap(yield) if block_given?
-
-        Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
-      end
-
-      # TODO: rename ALL 'option_button' to 'option_text' THROUGH ALL THE CODE
-      def option_button(option)
-        option[:button]
-      end
-
-      def option_name(option)
-        option[:name]
-      end
+      # 'before_show' mock is in base
+      # 'after_show' mock is in base
+      # 'callback' mock is in base
+      # 'message_text' mock is in base
     end
   end
 end

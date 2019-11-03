@@ -2,6 +2,8 @@
 
 module Helpers
   module MenusActions
+    private
+
     def launch_registration
       ::Actions::Users::Registration.new(bot: bot, tg_user: user).show
     end
@@ -22,12 +24,12 @@ module Helpers
 
     ################# All Schedules #################################
 
-    def show_add_schedule
-      ::Actions::Features::Schedules::AddSchedule.new(bot: bot, user: user).show
+    def show_add_schedule(no_back: false, message_text: nil)
+      ::Actions::Features::Schedules::AddSchedule.new(bot: bot, user: user, no_back: no_back, message_text: message_text).show
     end
 
     def show_schedule(schedule_id)
-      ::Actions::Features::Schedules::Schedule.new(bot: bot, user: user).show(schedule_id: schedule_id)
+      ::Actions::Features::Schedules::Schedule.new(bot: bot, user: user).show_short(schedule_id: schedule_id)
     end
 
     def call_back_all_schedules
@@ -41,20 +43,18 @@ module Helpers
     end
 
     def expand_schedule(schedule_id)
-      ::Actions::Features::Schedules::Schedule.new(bot: bot, user: user).expand(schedule_id: schedule_id)
+      ::Actions::Features::Schedules::Schedule.new(bot: bot, user: user).show_expanded(schedule_id: schedule_id)
     end
 
     def hide_schedule(schedule_id)
-      ::Actions::Features::Schedules::Schedule.new(bot: bot, user: user).hide(schedule_id: schedule_id)
+      ::Actions::Features::Schedules::Schedule.new(bot: bot, user: user).show_short(schedule_id: schedule_id)
     end
 
     def pin_schedule
-      set_replace_last_false
       ::Actions::Features::Schedules::Schedule.new(bot: bot, user: user).pin
     end
 
     def call_back_schedule
-      set_replace_last_true
       ::Actions::Features::Schedules::Schedule.new(bot: bot, user: user).back
     end
 

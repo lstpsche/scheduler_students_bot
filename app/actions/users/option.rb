@@ -23,30 +23,27 @@ module Actions
 
       private
 
-      def before_show(params = {})
-        @option = Constants.preferences_options.select { |opt| opt[:name] == params[:option] }.first
-      end
-
-      def after_show(*args)
-        set_replace_last_true
+      def before_show(args = {})
+        @option = Constants.preferences_options.select { |opt| opt[:name] == args[:option] }.first
       end
 
       def callback(command)
         Constants.option_callback % {
-          command: "#{command}_#{option_name(option)}",
-          return_to: nil
+          option_name: option_name(option),
+          action: command
         }
       end
 
       # 'create_button' is in base
       # 'create_markup' is in base
-      # 'option_button' is in base
+      # 'option_button_text' is in base
       # 'option_name' is in base
 
       def message_text
-        user_option_text = user_option_text(option_name(option))
-
-        "*#{option_button(option)}*\n#{user_option_text}"
+        I18n.t('actions.users.option.message_text',
+          button_text: option_button_text(option),
+          user_option_text: user_option_text(option_name(option))
+        )
       end
     end
   end
