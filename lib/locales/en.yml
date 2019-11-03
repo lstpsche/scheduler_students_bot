@@ -31,7 +31,8 @@ en:
             name: back
             button_text: <-- Back
         create_schedule:
-          header: By pressing this button you will be redirected to a new schedule creation at web-version of Scheduler
+          header: "By pressing this button you will be redirected to a new schedule creation at web-version of Scheduler\n\n*This link is one-time-use only!*"
+          button_text: Go to web version
         schedule:
           options:
             show:
@@ -107,6 +108,8 @@ en:
     friday: friday
     saturday: saturday
     sunday: sunday
+  web_version_links:
+    new_schedule: /schedules/new
   errors:
     bad_input: Please, be more serious
     invalid_schedule: Sorry, the schedule you've chosen does not exist
