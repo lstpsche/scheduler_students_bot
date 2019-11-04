@@ -21,14 +21,14 @@ module Actions
         end
 
         def show_short(schedule_id:)
-          @schedule = ::Schedule.find_by(id: schedule_id)
+          find_schedule_by(id: schedule_id)
           @expand = false
 
           show
         end
 
         def show_expanded(schedule_id:)
-          @schedule = ::Schedule.find_by(id: schedule_id)
+          find_schedule_by(id: schedule_id)
           @expand = true
 
           show
@@ -45,6 +45,10 @@ module Actions
         end
 
         private
+
+        def find_schedule_by(id:)
+          @schedule = ::Schedule.find_by(id: id)
+        end
 
         def callback(command)
           Constants.schedule_callback % {
