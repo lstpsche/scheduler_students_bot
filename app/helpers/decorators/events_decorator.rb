@@ -14,12 +14,12 @@ module Helpers
         schedule_additional_info = schedule.additional_info
         schedule_additional_info += "\n" unless schedule_additional_info.blank?
         text = I18n.t('messages_layouts.schedule_view.title',
-                 schedule_name: schedule.name,
-                 schedule_id: schedule.id,
-                 schedule_additional_info: schedule_additional_info
-               )
+                      schedule_name: schedule.name,
+                      schedule_id: schedule.id,
+                      schedule_additional_info: schedule_additional_info
+                     )
 
-        Constants.weekdays.each do |weekday|
+        Constant.weekdays.each do |weekday|
           text += weekday_decorated_text(weekday)
         end
 
@@ -30,15 +30,19 @@ module Helpers
 
       def weekday_decorated_text(weekday)
         header_weekday = I18n.t('message_layouts.schedule_view.events.weekday', weekday: weekday.capitalize)
-        schedule_events = events.select { |ev| ev.weekday == weekday }.map do |event|
-          Constants.event_in_schedule_decoration % {
+        schedule_events = assembled_events(weekday)
+
+        schedule_events ? header_weekday + schedule_events + "\n" : ''
+      end
+
+      def assembled_events(weekday)
+        events.select { |ev| ev.weekday == weekday }.map do |event|
+          Constant.event_in_schedule_decoration % {
             time: event.time,
             info: event.info,
             additional_info: event.additional_info
           } + "\n"
         end.inject(&:+)
-
-        schedule_events ? header_weekday + schedule_events + "\n" : ''
       end
     end
   end

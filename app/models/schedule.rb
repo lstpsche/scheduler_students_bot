@@ -5,7 +5,7 @@ class Schedule < ActiveRecord::Base
   has_many :users, through: :schedule_users
   has_many :events
 
-  scope :matching_student, ->(user) do
+  scope(:matching_student, lambda do |user|
     student_settings = user.student_settings
     result = where(
       university: student_settings.university,
@@ -16,6 +16,7 @@ class Schedule < ActiveRecord::Base
     result = result.where(group: student_settings.group) if student_settings.group.present?
     result
   end
+  )
   scope :available_for, ->(user) { matching_student(user).reject { |schedule| schedule.user_ids.include?(user.id) } }
   scope :for_student, -> { where(for_student: true) }
   scope :customed, -> { where(customed: true) }

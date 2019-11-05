@@ -2,7 +2,8 @@
 
 module Services
   class StudentOptionSetupService < Base
-    include Helpers::Actions::OptionSetupHelper
+    include Helpers::Services::OptionSetupHelper
+    include Helpers::Services::StudentOptionsSetupHelper
 
     # attrs from base -- :bot, :chat_id, :talker, :user
     attr_reader :response, :settings
@@ -15,26 +16,15 @@ module Services
     end
 
     def setup_all
-      settings.university = option_send_and_get_valid_response(option_name: 'university')
-      settings.faculty = option_send_and_get_valid_response(option_name: 'faculty')
-      settings.course = option_send_and_get_valid_response(option_name: 'course')
-      if settings.course.to_i > 2
-        settings.department = option_send_and_get_valid_response(option_name: 'department')
-      else
-        settings.group = option_send_and_get_valid_response(option_name: 'group')
-      end
-
+      setup_required_fields
+      setup_optional_fields
       show_something_wrong unless settings.save
     end
 
     def setup_option(option_name)
       new_option_value = option_send_and_get_valid_response(option_name: option_name)
 
-      saved = if user.send("#{option_name}") == new_option_value
-                true
-              else
-                settings.update("#{option_name}": new_option_value)
-              end
+      saved = user.send(option_name.to_s) == new_option_value || settings.update("#{option_name}": new_option_value)
 
       if saved
         show_option_successfully_setup

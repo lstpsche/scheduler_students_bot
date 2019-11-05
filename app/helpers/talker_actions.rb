@@ -6,12 +6,13 @@ module Helpers
 
     #################### Setups ####################################
 
-    def talker(bot = @bot, chat_id = @chat_id, user = @user)
+    def talker(bot = @bot, chat_id = @chat_id, _user = @user)
       Talker.new(bot: bot, chat_id: chat_id, user: get_user(chat_id: chat_id))
     end
 
     ############## Sending--Editing--Getting #######################
 
+    # rubocop:disable Naming/AccessorMethodName
     def get_message
       talker.get_message
     end
@@ -23,6 +24,7 @@ module Helpers
 
       message_data_from(@response)
     end
+    # rubocop:enable Naming/AccessorMethodName
 
     # type should be 'message' or 'callback_query'
     def get_response_of_type(type)
@@ -39,7 +41,7 @@ module Helpers
     end
 
     def edit_message(message_id:, text:, markup: nil, parse_mode: 'markdown')
-      talker.edit_message(message_id: message_id, text: text, markup: markup, parse_mode: 'markdown')
+      talker.edit_message(message_id: message_id, text: text, markup: markup, parse_mode: parse_mode)
     end
 
     def edit_message_reply_markup(message_id:, reply_markup: nil)
@@ -47,8 +49,10 @@ module Helpers
     end
 
     def send_or_edit_message(message_id: nil, text: nil, markup: nil, parse_mode: 'markdown')
-      talker.send_or_edit_message(message_id: message_id, text: text,
-                                  markup: markup, parse_mode: parse_mode)
+      talker.send_or_edit_message(
+        message_id: message_id, text: text,
+        markup: markup, parse_mode: parse_mode
+      )
     end
 
     def send_student_option_message(option_name, user, markup = nil)

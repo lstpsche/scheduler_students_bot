@@ -11,9 +11,9 @@ module Helpers
     def message_data_from(message)
       case message
       when Telegram::Bot::Types::Message
-        return message.text
+        message.text
       when Telegram::Bot::Types::CallbackQuery
-        return message.data
+        message.data
       end
     end
 

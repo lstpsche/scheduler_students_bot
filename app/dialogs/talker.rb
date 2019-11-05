@@ -13,9 +13,11 @@ class Talker
 
   ############## Sending--Editing--Getting #######################
 
+  # rubocop:disable Naming/AccessorMethodName
   def get_message
     bot.listen { |message| return message }
   end
+  # rubocop:enable Naming/AccessorMethodName
 
   def send_message(text:, markup: nil, parse_mode: 'markdown')
     markup = Telegram::Bot::Types::ReplyKeyboardRemove.new(remove_keyboard: true) if markup == 'remove'
@@ -35,8 +37,9 @@ class Talker
   end
 
   def send_or_edit_message(message_id: nil, text: nil, markup: nil, parse_mode: 'markdown')
-    if message_id.present? || user&.tapped_message.present?
-      edit_message(message_id: message_id.presence || tapped_message_id, text: text, markup: markup, parse_mode: parse_mode)
+    message_id = message_id.presence || user&.tapped_message_id
+    if message_id
+      edit_message(message_id: message_id, text: text, markup: markup, parse_mode: parse_mode)
     else
       send_message(text: text, markup: markup, parse_mode: parse_mode)
     end
