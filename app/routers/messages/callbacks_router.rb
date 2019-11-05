@@ -43,7 +43,7 @@ module Routers
       end
 
       def parse_callback(command)
-        # /^(\w+)-(\w+)?$/
+        # /^(\w+)-(\w+)$/
         parsed_command = command.match(Constants.context_command_regex)
 
         params[:handler_class] = parsed_command[1]

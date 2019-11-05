@@ -32,12 +32,12 @@ module Actions
         # create_button is in base
 
         def create_markup(markup_options)
-          super(markup_options) do
-            add_text = I18n.t('actions.features.schedules.all_schedules.add_schedule.button_text')
-            add_callback = I18n.t('actions.features.schedules.all_schedules.add_schedule.name')
-            back_text = I18n.t('actions.features.schedules.all_schedules.back.button_text')
-            back_callback = I18n.t('actions.features.schedules.all_schedules.back.name')
+          add_text = I18n.t('actions.features.schedules.all_schedules.add_schedule.button_text')
+          add_callback = I18n.t('actions.features.schedules.all_schedules.add_schedule.name')
+          back_text = I18n.t('actions.features.schedules.all_schedules.back.button_text')
+          back_callback = I18n.t('actions.features.schedules.all_schedules.back.name')
 
+          super(markup_options) do
             [
               create_button(add_text, add_callback),
               create_button(back_text, back_callback)
