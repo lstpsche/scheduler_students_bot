@@ -17,10 +17,6 @@ module Helpers
       end
     end
 
-    def presence(value)
-      value.present? ? value : false
-    end
-
     def reset_user_tapped_message
       user&.update(tapped_message: nil)
     end

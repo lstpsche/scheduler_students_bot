@@ -8,7 +8,6 @@ module Actions
 
         # 'initialize' is in base
 
-        # 'show' is in base
         def show
           params = {
             markup_options: []
@@ -18,6 +17,14 @@ module Actions
         end
 
         private
+
+        def before_show(*args)
+          user.update(authentication_token: generate_auth_token) unless user.authentication_token.present?
+        end
+
+        def generate_auth_token
+          SecureRandom.urlsafe_base64
+        end
 
         def create_button_with_url(text)
           Telegram::Bot::Types::InlineKeyboardButton.new(
