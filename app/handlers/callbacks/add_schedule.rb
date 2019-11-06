@@ -33,7 +33,7 @@ module Handlers
       end
 
       def check_schedule_validity
-        raise 'Invalid schedule_id' unless schedule.present?
+        raise '500: Invalid schedule_id' unless schedule.present?
       end
     end
   end

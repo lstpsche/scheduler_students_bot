@@ -37,12 +37,16 @@ module Helpers
 
       def assembled_events(weekday)
         events.select { |ev| ev.weekday == weekday }.map do |event|
-          Constant.event_in_schedule_decoration % {
-            time: event.time,
-            info: event.info,
-            additional_info: event.additional_info
-          } + "\n"
+          decorated_event(event)
         end.inject(&:+)
+      end
+
+      def decorated_event(event)
+        Constant.event_in_schedule_decoration % {
+          time: event.time,
+          info: event.info,
+          additional_info: event.additional_info
+        } + "\n"
       end
     end
   end

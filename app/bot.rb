@@ -18,7 +18,7 @@ class Bot
       talker = Talker.new(bot: bot)
 
       loop do
-        message = talker.get_message
+        message = talker.receive_message
         # binding.pry
         parse_message_type(message)
       rescue StandardError => error
