@@ -34,17 +34,17 @@ module Actions
         }
       end
 
-      # 'create_button' is in base
-      # 'create_markup' is in base
-      # 'option_button_text' is in base
-      # 'option_name' is in base
-
       def message_text
         I18n.t('actions.users.option.message_text',
                button_text: option_button_text(option),
                user_option_text: user_option_text(option_name(option))
               )
       end
+
+      # 'create_button' is in base
+      # 'create_markup' is in base
+      # 'option_button_text' is in base
+      # 'option_name' is in base
     end
   end
 end

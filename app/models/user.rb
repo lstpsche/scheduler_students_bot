@@ -15,7 +15,9 @@ class User < ActiveRecord::Base
         }
       },
       'replace_last_message' => false,
-      'tapped_message' => nil
+      'tapped_message' => {
+        'message_id' => nil
+      }
     }
   end
 
@@ -32,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def tapped_message
-    context['tapped_message'] || {}
+    context['tapped_message'] || empty_context['tapped_message']
   end
 
   def tapped_message=(msg)

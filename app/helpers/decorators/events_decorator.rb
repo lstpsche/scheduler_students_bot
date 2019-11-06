@@ -13,7 +13,7 @@ module Helpers
       def decorate_for_show_schedule
         schedule_additional_info = schedule.additional_info
         schedule_additional_info += "\n" unless schedule_additional_info.blank?
-        text = I18n.t('messages_layouts.schedule_view.title',
+        text = I18n.t('layouts.schedule_view.title',
                       schedule_name: schedule.name,
                       schedule_id: schedule.id,
                       schedule_additional_info: schedule_additional_info
@@ -42,11 +42,11 @@ module Helpers
       end
 
       def decorated_event(event)
-        Constant.event_in_schedule_decoration % {
-          time: event.time,
-          info: event.info,
-          additional_info: event.additional_info
-        } + "\n"
+        I18n.t('layouts.schedule.events.event',
+               time: event.time,
+               info: event.info,
+               additional_info: event.additional_info
+              )
       end
     end
   end

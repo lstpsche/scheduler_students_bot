@@ -100,11 +100,12 @@ en:
     help: "/menu - show main menu\n/help - show this message"
     'no': 'No'
     'yes': 'Yes'
-  messages_layouts:
-    schedule_view:
+  layouts:
+    schedule:
       title: "*%{schedule_name}* `#%{schedule_id}`\n%{schedule_additional_info}"
       events:
         weekday: "*%{weekday}*:\n"
+        event: "*%{time}*: %{info} _(%{additional_info})_\n"
   weekdays:
     monday: monday
     tuesday: tuesday

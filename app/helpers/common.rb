@@ -30,7 +30,7 @@ module Helpers
     end
 
     def user_option_text(option_name)
-      if option.present?
+      if user.try(option_name).present?
         I18n.t('actions.users.option.user_option_text.present', option_value: user_option(option_name))
       else
         I18n.t('actions.users.option.user_option_text.not_present')

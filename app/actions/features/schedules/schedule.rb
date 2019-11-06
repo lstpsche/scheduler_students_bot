@@ -61,7 +61,7 @@ module Actions
           if expand?
             decorate_for_show_schedule(schedule)
           else
-            I18n.t('messages_layouts.schedule_view.title',
+            I18n.t('layouts.schedule_view.title',
                    schedule_name: schedule.name,
                    schedule_id: schedule.id,
                    schedule_additional_info: schedule_additional_info(schedule)

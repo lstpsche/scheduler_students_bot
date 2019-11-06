@@ -5,9 +5,9 @@ module Helpers
     module OptionSetupHelper
       private
 
-      def option_send_and_get_valid_response(option_name:, only_get_response: false)
+      def option_send_and_get_valid_response(option_name:, only_receive_response: false)
         reset_user_tapped_message
-        send_student_option_message(option_name, user) unless only_get_response
+        send_student_option_message(option_name, user) unless only_receive_response
         receive_valid_response
       rescue StandardError => _error
         rescue_from_invalid_option_input(option_name: option_name)
@@ -29,7 +29,7 @@ module Helpers
 
       def rescue_from_invalid_option_input(option_name:)
         send_message(text: I18n.t(option_name, scope: 'errors.student_settings.not_valid_input'))
-        option_send_and_get_valid_response(option_name: option_name, only_get_response: true)
+        option_send_and_get_valid_response(option_name: option_name, only_receive_response: true)
       end
     end
   end

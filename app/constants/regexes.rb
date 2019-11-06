@@ -9,9 +9,5 @@ module Constants
     def context_command_regex
       /^(\w+)-(\w+)?$/
     end
-
-    def event_in_schedule_decoration
-      '*%{time}*: %{info} _(%{additional_info})_'
-    end
   end
 end

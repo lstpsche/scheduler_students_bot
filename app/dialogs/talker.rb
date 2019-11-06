@@ -36,6 +36,7 @@ class Talker
 
   def send_or_edit_message(message_id: nil, text: nil, markup: nil)
     message_id = message_id.presence || user&.tapped_message_id
+
     if message_id
       edit_message(message_id: message_id, text: text, markup: markup)
     else
