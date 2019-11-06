@@ -11,9 +11,8 @@ module Handlers
 
       def initialize(bot:, chat_id:, user:)
         @bot = bot
-        @chat_id = user.id
+        @chat_id = chat_id
         @user = user
-        yield if block_given?
       end
     end
   end

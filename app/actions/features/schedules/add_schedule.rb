@@ -25,7 +25,7 @@ module Actions
         private
 
         def callback(schedule_id)
-          Constants.add_schedule_callback % { schedule_id: schedule_id }
+          Constant.add_schedule_callback % { schedule_id: schedule_id }
         end
 
         def create_markup(markup_options)
@@ -42,7 +42,7 @@ module Actions
 
         def message_text
           @message_text.presence ||
-            @schedules.compact.empty? ? no_schedules_message_text : schedules_present_message_text
+            (@schedules.compact.empty? ? no_schedules_message_text : schedules_present_message_text)
         end
 
         def schedules_present_message_text

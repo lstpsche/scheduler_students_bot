@@ -13,7 +13,7 @@ module Routers
         'preferences' => Handlers::Callbacks::Preferences,
         'schedule' => Handlers::Callbacks::Schedule,
         'schedules' => Handlers::Callbacks::AllSchedules
-      }
+      }.freeze
 
       def initialize(bot:)
         super do
@@ -35,7 +35,6 @@ module Routers
       end
 
       def init_vars(callback)
-        @user_id = callback.from.id
         @tapped_message = callback.message
         @chat_id = callback.from.id
         @user = get_user(chat_id: chat_id)
@@ -44,7 +43,7 @@ module Routers
 
       def parse_callback(command)
         # /^(\w+)-(\w+)$/
-        parsed_command = command.match(Constants.context_command_regex)
+        parsed_command = command.match(Constant.context_command_regex)
 
         params[:handler_class] = parsed_command[1]
         params[:command] = parsed_command[2]

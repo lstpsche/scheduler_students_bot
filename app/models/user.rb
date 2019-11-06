@@ -7,10 +7,6 @@ class User < ActiveRecord::Base
   has_many :schedule_users, dependent: :destroy
   has_many :schedules, through: :schedule_users
 
-  def method_missing(method_name, *args, &block)
-    nil
-  end
-
   def empty_context
     {
       'last_message' => {

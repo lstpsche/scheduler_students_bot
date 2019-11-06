@@ -3,26 +3,27 @@
 module Services
   class TextCommandValidationService < Base
     # attrs from base -- :bot, :chat_id, :user
-    attr_reader :command, :success, :errors
-
-    alias :success? :success
+    attr_reader :command, :errors
 
     def initialize(bot:, chat_id:, command:)
       @bot = bot
       @chat_id = chat_id
       @command = command
       @errors = []
-      @success = validate
+    end
+
+    def success?
+      validate
     end
 
     def failure?
-      !success
+      !success?
     end
 
     private
 
     def validate
-      return bad_message unless message_valid
+      return bad_message unless message_valid?
       return not_understand unless command_syntax_valid?
       return no_command unless command_exists?
       return not_registered if registration_needed?
@@ -30,16 +31,16 @@ module Services
       true
     end
 
-    def message_valid
-      not command.nil?
+    def message_valid?
+      command.present?
     end
 
     def command_syntax_valid?
-      command.match(Constants.command_regex)
+      command.match(Constant.command_regex)
     end
 
     def command_exists?
-      Constants.text_commands.include? command
+      Constant.text_commands.include? command
     end
 
     def registration_needed?
@@ -47,22 +48,22 @@ module Services
     end
 
     def bad_message
-      errors << 'Bad input'
+      errors << '400: Bad input'
       false
     end
 
     def not_understand
-      errors << 'Not understand'
+      errors << '400: Not understand'
       false
     end
 
     def no_command
-      errors << 'No command'
+      errors << '501: No command'
       false
     end
 
     def not_registered
-      errors << 'Not registered'
+      errors << '401: Not registered'
       false
     end
   end

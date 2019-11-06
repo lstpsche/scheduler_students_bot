@@ -11,9 +11,9 @@ module Helpers
     def message_data_from(message)
       case message
       when Telegram::Bot::Types::Message
-        return message.text
+        message.text
       when Telegram::Bot::Types::CallbackQuery
-        return message.data
+        message.data
       end
     end
 
@@ -26,7 +26,7 @@ module Helpers
     end
 
     def user_option(option_name)
-      user&.send(option_name) || user.student_settings&.send(option_name)
+      user.try(option_name) || user.student_settings&.try(option_name)
     end
 
     def user_option_text(option_name)
