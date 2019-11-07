@@ -1,5 +1,3 @@
-# exclude_paths:
-
 detectors:
   BooleanParameter:
     enabled: false
