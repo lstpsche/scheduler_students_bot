@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Constants
+  # :reek:TooManyConstants:
   module OptionsLists
     IN_SCHEDULE_OPTIONS = %i[
       hide

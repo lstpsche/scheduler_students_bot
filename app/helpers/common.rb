@@ -4,6 +4,10 @@ module Helpers
   module Common
     private
 
+    def bot_api
+      bot.api
+    end
+
     def get_user(user = nil, chat_id: nil, fallback_user: nil)
       @user || user || User.find_by(id: chat_id) || fallback_user
     end
@@ -18,7 +22,7 @@ module Helpers
     end
 
     def reset_user_tapped_message
-      user&.update(tapped_message: nil)
+      user.present? && user.update(tapped_message: nil)
     end
 
     def student_registered?(id:)
@@ -26,7 +30,7 @@ module Helpers
     end
 
     def user_option(option_name)
-      user.try(option_name) || user.student_settings&.try(option_name)
+      user.try(option_name) || user.student_option(option_name)
     end
 
     def user_option_text(option_name)
