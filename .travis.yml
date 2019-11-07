@@ -5,7 +5,7 @@ rvm:
 services:
   - postgresql
 before_script:
-  - RAILS_ENV=test bundle exec rake db:setup
+  - RAILS_ENV=test bundle exec rake db:schema:load
 script:
   - bundle exec rubocop
   - bundle exec reek
