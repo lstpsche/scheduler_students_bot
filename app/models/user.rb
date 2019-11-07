@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     student_settings.present?
   end
 
+  def student_option(option_name)
+    student_settings&.try(option_name)
+  end
+
   class << self
     def registered?(id:)
       find_by(id: id).present?
