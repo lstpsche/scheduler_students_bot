@@ -9,10 +9,10 @@ detectors:
     enabled: false
   NilCheck:
     enabled: false
-  # TooManyInstanceVariables:
-  #   max_instance_variables: 6
-  # UtilityFunction:
-  #   enabled: false
+  TooManyInstanceVariables:
+    max_instance_variables: 6
+  UtilityFunction:
+    enabled: false
 
 exclude_paths:
   - db/
