@@ -24,9 +24,7 @@ module Services
     def setup_option(option_name)
       new_option_value = option_send_and_get_valid_response(option_name: option_name)
 
-      saved = option_not_changed?(option_name, new_option_value) || settings.update("#{option_name}": new_option_value)
-
-      if saved
+      if save_settings(option_name, new_option_value)
         show_option_successfully_setup
       else
         show_something_wrong
@@ -34,6 +32,10 @@ module Services
     end
 
     private
+
+    def save_settings(option_name, new_option_value)
+      option_not_changed?(option_name, new_option_value) || settings.update("#{option_name}": new_option_value)
+    end
 
     def option_not_changed?(option_name, new_option_value)
       student_registered?(id: user.id) && user.student_settings.try(option_name) == new_option_value
