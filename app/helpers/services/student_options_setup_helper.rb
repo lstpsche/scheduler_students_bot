@@ -13,10 +13,18 @@ module Helpers
 
       def setup_optional_fields
         if settings.course.to_i > 2
-          settings.department = option_send_and_get_valid_response(option_name: 'department')
+          setup_department_field
         else
-          settings.group = option_send_and_get_valid_response(option_name: 'group')
+          setup_group_field
         end
+      end
+
+      def setup_department_field
+        settings.department = option_send_and_get_valid_response(option_name: 'department')
+      end
+
+      def setup_group_field
+        settings.group = option_send_and_get_valid_response(option_name: 'group')
       end
     end
   end
