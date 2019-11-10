@@ -2,18 +2,14 @@
 
 module Handlers
   module TextCommands
-    class Base
-      include Helpers::Common
-      include Helpers::MenusActions
-      include Helpers::TalkerActions
+    class Base < Handlers::Base
+      # Helpers::Common
+      # Helpers::Menus::Actions
+      # Helpers::Talker::Actions
 
-      attr_reader :bot, :chat_id, :user
+      # attrs from base -- :bot, :chat_id, :user
 
-      def initialize(bot:, chat_id:, user:)
-        @bot = bot
-        @chat_id = chat_id
-        @user = user
-      end
+      # 'initialize' is in base
     end
   end
 end

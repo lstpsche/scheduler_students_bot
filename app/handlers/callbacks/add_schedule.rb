@@ -6,14 +6,17 @@ module Handlers
       # attrs from base -- :bot, :chat_id, :user
       attr_reader :schedule
 
+      HANDLE_METHODS = {
+        'create': :create_schedule_action,
+        'back': :show_all_schedules
+        # 'external': :add_external_schedule
+      }.with_indifferent_access
+
       # 'initialize' is in base
 
       def handle(command)
-        case command
-        when 'create'
-          create_schedule_action
-        when 'back'
-          show_all_schedules
+        if handler_exists_for?(command)
+          call_handler(command)
         else
           add_schedule(command)
         end
@@ -21,24 +24,22 @@ module Handlers
 
       private
 
-      def add_schedule(schedule_id)
-        @schedule = ::Schedule.find_by(id: schedule_id)
+      def handler_exists_for?(command)
+        HANDLE_METHODS.keys.include?(command)
+      end
 
-        check_schedule_validity
+      def call_handler(command)
+        method(HANDLE_METHODS[command]).call
+      end
+
+      def add_schedule(schedule_id)
+        check_schedule_validity(schedule_id)
         add_schedule_to_user
         show_all_schedules
       end
 
       def add_schedule_to_user
         Services::Schedules::ScheduleUserInteraction.new(bot: bot, user: user, schedule: schedule).perform
-      end
-
-      def create_schedule_action
-        ::Actions::Features::Schedules::CreateSchedule.new(bot: bot, user: user).show
-      end
-
-      def check_schedule_validity
-        raise '500: Invalid schedule_id' unless schedule.present?
       end
     end
   end

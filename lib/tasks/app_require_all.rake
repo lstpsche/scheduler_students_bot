@@ -18,22 +18,40 @@ namespace :app do
   task 'require_files' do
     # ORDER MATTERS
 
+    ## helpers -- talker
+    require_all 'app/helpers/talker/common_actions.rb'
+    require_all 'app/helpers/talker/errors.rb'
+    require_all 'app/helpers/talker'
+    ## helpers -- menus
+    require_all 'app/helpers/menus/registration.rb'
+    require_all 'app/helpers/menus/main_menu.rb'
+    require_all 'app/helpers/menus/schedules.rb'
+    require_all 'app/helpers/menus/preferences.rb'
+    require_all 'app/helpers/menus'
     ## helpers
     require_all 'app/helpers'
     ## services
     require_all 'app/services'
-    ## actions
-    require_all 'app/actions/base.rb'
-    require_all 'app/actions/users'
-    require_all 'app/actions/features'
-    ## dialogs
-    require_all 'app/dialogs'
     ## handlers
+    require_all 'app/handlers/*.rb'
     require_all 'app/handlers/callbacks/base.rb'
     require_all 'app/handlers/callbacks'
     require_all 'app/handlers/text_commands'
+    ## actions
+    require_all 'app/actions/base.rb'
+    require_all 'app/actions/users/base.rb'
+    require_all 'app/actions/users'
+    require_all 'app/actions/features/base.rb'
+    require_all 'app/actions/features/schedules/base.rb'
+    require_all 'app/actions/features'
+    ## dialogs
+    require_all 'app/dialogs'
     ## routers
-    require_all 'app/routers'
+    require_all 'app/routers/base.rb'
+    require_all 'app/routers/features'
+    require_all 'app/routers/messages/text_commands_router.rb'
+    require_all 'app/routers/messages/callbacks_router.rb'
+    require_all 'app/routers/messages'
     ## serializers
     require_all 'app/serializers'
     ## constants

@@ -3,7 +3,7 @@
 class Schedule < ActiveRecord::Base
   has_many :schedule_users, dependent: :destroy
   has_many :users, through: :schedule_users
-  has_many :events
+  has_many :events, dependent: :destroy
 
   scope :matching_student, (lambda do |user|
     student_settings = user.student_settings
@@ -16,6 +16,7 @@ class Schedule < ActiveRecord::Base
     result = result.where(group: student_settings.group) if student_settings.group.present?
     result
   end)
+  # TODO: only public schedules should be returned here
   scope :available_for, ->(user) { matching_student(user).reject { |schedule| schedule.user_ids.include?(user.id) } }
   scope :for_student, -> { where(for_student: true) }
   scope :customed, -> { where(customed: true) }

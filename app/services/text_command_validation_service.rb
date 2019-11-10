@@ -8,25 +8,25 @@ module Services
     def initialize(bot:, chat_id:, command:)
       @bot = bot
       @chat_id = chat_id
-      @command = command
       @errors = []
-    end
-
-    def success?
-      validate
+      @command = command
     end
 
     def failure?
-      !success?
+      !validate
     end
 
     private
 
+    CHECKS = {
+      registration_not_needed?: :not_registered,
+      message_valid?: :bad_message,
+      command_syntax_valid?: :not_understand,
+      command_exists?: :no_command
+    }.with_indifferent_access
+
     def validate
-      return not_registered if registration_needed?
-      return bad_message unless message_valid?
-      return not_understand unless command_syntax_valid?
-      return no_command unless command_exists?
+      CHECKS.each { |check, callback| return send(callback) unless send(check) }
 
       true
     end
@@ -43,27 +43,27 @@ module Services
       Constant.text_commands.include? command
     end
 
-    def registration_needed?
-      command != '/start' && !user_registered?(id: chat_id)
+    def registration_not_needed?
+      user_registered?(id: chat_id) || command == '/start'
     end
 
     def bad_message
-      errors << '400: Bad input'
+      errors << Error.new(code: 400, message: 'Bad input')
       false
     end
 
     def not_understand
-      errors << '400: Not understand'
+      errors << Error.new(code: 400, message: 'Not understand')
       false
     end
 
     def no_command
-      errors << '501: No command'
+      errors << Error.new(code: 501, message: 'No command')
       false
     end
 
     def not_registered
-      errors << '401: Not registered'
+      errors << Error.new(code: 401, message: 'Not registered')
       false
     end
   end

@@ -16,15 +16,7 @@ class Constant
     end
 
     def weekdays
-      %w[
-        monday
-        tuesday
-        wednesday
-        thursday
-        friday
-        saturday
-        sunday
-      ]
+      %w[monday tuesday wednesday thursday friday saturday sunday]
     end
 
     def translated_weekdays
