@@ -2,37 +2,28 @@
 
 module Actions
   module Features
-    class Menu < Base
-      # attrs from base -- :bot, :chat_id, :user
+    class Menu < Actions::Features::Base
+      # attrs from base -- :bot, :chat_id, :user, :params
 
       # 'initialize' is in base
-      # 'show' method is in base
 
       def show
-        params = {
+        @params = Params.new(
           markup_options: Constant.menu_options
-        }
+        )
 
-        super(params)
+        super
       end
 
       private
 
-      def callback(command)
-        Constant.main_menu_callback % {
-          command: command
-        }
+      def callback
+        Constant.main_menu_callback
       end
-
-      # 'create_button' is in base
-      # 'create_markup' is in base
 
       def message_text
         I18n.t('actions.features.menu.header')
       end
-
-      # 'option_button_text' is in base
-      # 'option_name' is in base
     end
   end
 end

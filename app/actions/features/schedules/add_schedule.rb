@@ -3,8 +3,8 @@
 module Actions
   module Features
     module Schedules
-      class AddSchedule < Base
-        # attrs from base -- :bot, :chat_id, :user
+      class AddSchedule < Actions::Features::Schedules::Base
+        # attrs from base -- :bot, :chat_id, :user, :params
         attr_reader :schedules
 
         def initialize(bot:, user:, **params)
@@ -15,34 +15,43 @@ module Actions
         end
 
         def show
-          params = {
+          @params = Params.new(
             markup_options: schedules
-          }
+          )
 
-          super(params)
+          super
         end
 
         private
 
-        def callback(schedule_id)
-          Constant.add_schedule_callback % { schedule_id: schedule_id }
+        def callback
+          Constant.add_schedule_callback
         end
 
-        def create_markup(markup_options)
-          super(markup_options) do
-            back = I18n.t('actions.features.schedules.add_schedule.back') unless @no_back
-            create = I18n.t('actions.features.schedules.add_schedule.create_new')
-
+        def create_markup
+          super do
             [
-              create_button(create[:button_text], create[:name]),
-              (@no_back ? nil : create_button(back[:button_text], back[:name]))
+              create_schedule_button,
+              back_button
             ].compact
           end
         end
 
+        def create_schedule_button
+          create_schedule = I18n.t('actions.features.schedules.add_schedule.create_new')
+          Button.new(button_args(create_schedule)).inline
+        end
+
+        def back_button
+          return nil if @no_back
+
+          back = I18n.t('actions.features.schedules.add_schedule.back')
+          Button.new(button_args(back)).inline
+        end
+
         def message_text
           @message_text.presence ||
-            (@schedules.compact.empty? ? no_schedules_message_text : schedules_present_message_text)
+            (@schedules.compact.present? ? schedules_present_message_text : no_schedules_message_text)
         end
 
         def schedules_present_message_text
@@ -53,13 +62,13 @@ module Actions
           I18n.t('actions.features.schedules.add_schedule.no_schedules_header')
         end
 
-        def option_button_text(schedule)
-          schedule.name
+        def create_button_for_kb(schedule)
+          super({}) do |button|
+            button.update(schedule_options(schedule))
+          end
         end
 
-        def option_name(schedule)
-          schedule.id
-        end
+        # 'schedule_options' is in base
       end
     end
   end

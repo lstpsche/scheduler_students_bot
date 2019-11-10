@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Services
+module Handlers
   class Base
     include Helpers::Common
     include Helpers::Menus::Actions
@@ -12,7 +12,6 @@ module Services
       @bot = bot
       @chat_id = user.id
       @user = user
-      yield if block_given?
     end
   end
 end

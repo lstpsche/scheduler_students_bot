@@ -21,6 +21,17 @@ module Helpers
       end
     end
 
+    # type should be 'message' or 'callback_query'
+    def message_is_a?(type, message)
+      type = type.split('_').map(&:capitalize).join
+
+      message_type(message) == type
+    end
+
+    def message_type(message)
+      message.class.name.demodulize
+    end
+
     def reset_user_tapped_message
       user.present? && user.update(tapped_message: nil)
     end
@@ -34,8 +45,10 @@ module Helpers
     end
 
     def user_option_text(option_name)
-      if user.try(option_name).present?
-        I18n.t('actions.users.option.user_option_text.present', option_value: user_option(option_name))
+      option = user_option(option_name)
+
+      if option.present?
+        I18n.t('actions.users.option.user_option_text.present', option_value: option)
       else
         I18n.t('actions.users.option.user_option_text.not_present')
       end
