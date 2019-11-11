@@ -1,6 +1,8 @@
 # Scheduler Students Telegram Bot
 
-Group chats are **not supported**!
+[![Build Status](https://travis-ci.com/lstpsche/scheduler_students_bot.svg?branch=master)](https://travis-ci.com/lstpsche/scheduler_students_bot)
+[![codebeat badge](https://codebeat.co/badges/0659ca62-2140-4227-b2d0-1a1fa01dac63)](https://codebeat.co/projects/github-com-lstpsche-scheduler_students_bot-master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/af8b273b834478392d80/maintainability)](https://codeclimate.com/github/lstpsche/scheduler_students_bot/maintainability)
 
 ### Start postgresql server
 
