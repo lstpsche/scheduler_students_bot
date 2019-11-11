@@ -1,6 +1,7 @@
 # Scheduler Students Telegram Bot
 
 [![Build Status](https://travis-ci.com/lstpsche/scheduler_students_bot.svg?branch=master)](https://travis-ci.com/lstpsche/scheduler_students_bot)
+[![codebeat badge](https://codebeat.co/badges/0659ca62-2140-4227-b2d0-1a1fa01dac63)](https://codebeat.co/projects/github-com-lstpsche-scheduler_students_bot-master)
 
 ### Start postgresql server
 
