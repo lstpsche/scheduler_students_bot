@@ -5,7 +5,6 @@ module Actions
     module Schedules
       class Schedule < Actions::Features::Schedules::Base
         # attrs from base -- :bot, :chat_id, :user, :params
-        attr_reader :schedule
 
         # 'initialize' is in base
 
@@ -37,7 +36,7 @@ module Actions
 
         def schedule_callback(args)
           Constant.schedule_callback % {
-            schedule_id: schedule.id,
+            schedule_id: @schedule.id,
             action: args[:name]
           }
         end
