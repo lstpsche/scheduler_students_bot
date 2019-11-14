@@ -8,6 +8,7 @@ module Routers
 
       HANDLERS = {
         'add_schedule' => Handlers::Callbacks::AddSchedule,
+        'create_schedule' => Handlers::Callbacks::CreateSchedule,
         'menu' => Handlers::Callbacks::Menu,
         'options' => Handlers::Callbacks::Options,
         'preferences' => Handlers::Callbacks::Preferences,
@@ -16,9 +17,8 @@ module Routers
       }.freeze
 
       def initialize(bot:)
-        super do
-          @params = {}
-        end
+        super
+        @params = {}
       end
 
       def route(callback)
@@ -35,8 +35,8 @@ module Routers
       end
 
       def init_vars(callback)
-        @tapped_message = callback.message
         @chat_id = callback.from.id
+        @tapped_message = callback.message
         @user = get_user(chat_id: chat_id)
         parse_callback(callback.data)
       end

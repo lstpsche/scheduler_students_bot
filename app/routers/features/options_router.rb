@@ -6,10 +6,9 @@ module Routers
       # attrs from base -- :bot, :chat_id, :user
 
       def initialize(bot:, user: nil)
-        super(bot: bot) do
-          @user = user
-          @chat_id = user.id
-        end
+        super(bot: bot)
+        @user = user
+        @chat_id = user.id
       end
 
       def route(command)
@@ -17,7 +16,7 @@ module Routers
 
         case action
         when 'show'
-          option_name == 'back' ? back : show(option_name)
+          show(option_name)
         when 'setup'
           setup(option_name)
         end
@@ -29,11 +28,8 @@ module Routers
 
       def setup(option_name)
         setup_student_option(option_name)
+        reset_user_tapped_message
         show_option(option_name)
-      end
-
-      def back
-        show_main_menu
       end
     end
   end
