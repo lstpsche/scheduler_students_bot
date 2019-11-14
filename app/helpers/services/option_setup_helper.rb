@@ -22,7 +22,6 @@ module Helpers
         #   @validity_checker = Services::StudentOptionValidityChecker.new(option_name)
         # end
         # @validity_checker.check(response)
-        raise 'Not valid' if response == 'test'
 
         response
       end
