@@ -6,7 +6,7 @@ module Helpers
       private
 
       def launch_registration
-        ::Actions::Users::Registration.new(bot: bot, tg_user: user).launch
+        ::Actions::Users::Registration.new(bot: bot, tg_user: user).show
       end
     end
   end
