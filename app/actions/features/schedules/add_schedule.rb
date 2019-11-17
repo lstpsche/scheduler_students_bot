@@ -10,7 +10,6 @@ module Actions
         def initialize(bot:, user:, **params)
           super(bot: bot, user: user)
           @no_back = params[:no_back]
-          @message_text = params[:message_text]
           @schedules = ::Schedule.available_for(user)
         end
 
@@ -50,8 +49,7 @@ module Actions
         end
 
         def message_text
-          @message_text.presence ||
-            (@schedules.compact.present? ? schedules_present_message_text : no_schedules_message_text)
+          @schedules.compact.present? ? schedules_present_message_text : no_schedules_message_text
         end
 
         def schedules_present_message_text

@@ -7,9 +7,8 @@ module Helpers
 
       ################# All Schedules #################################
 
-      def show_add_schedule(no_back: false, message_text: nil)
-        ::Actions::Features::Schedules::AddSchedule
-          .new(bot: bot, user: user, no_back: no_back, message_text: message_text).show
+      def show_add_schedule(no_back: false)
+        ::Actions::Features::Schedules::AddSchedule.new(bot: bot, user: user, no_back: no_back).show
       end
 
       def call_back_all_schedules
