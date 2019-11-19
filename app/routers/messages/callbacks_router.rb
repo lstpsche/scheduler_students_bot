@@ -2,7 +2,7 @@
 
 module Routers
   module Messages
-    class CallbacksRouter < Base
+    class CallbacksRouter < Routers::Messages::Base
       # attrs from base -- :bot, :chat_id, :user
       attr_reader :params, :tapped_message
 
@@ -23,6 +23,7 @@ module Routers
 
       def route(callback)
         init_vars(callback)
+        update_language_code(user.language_code)
 
         update_user_tapped_message
         call_handler
