@@ -57,5 +57,9 @@ module Helpers
     def user_registered?(id:)
       User.registered?(id: id)
     end
+
+    def update_language_code(code)
+      @user.update(language_code: code) unless @user.blank? && @user.language_code == code
+    end
   end
 end
