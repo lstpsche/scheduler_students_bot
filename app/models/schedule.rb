@@ -17,10 +17,14 @@ class Schedule < ActiveRecord::Base
     result
   end)
   # TODO: only public schedules should be returned here
-  scope :available_for, ->(user) { matching_student(user).reject { |schedule| schedule.user_ids.include?(user.id) } }
-  scope :for_student, -> { where(for_student: true) }
+  scope :available_for, (lambda do |user|
+    public_ones.matching_student(user).reject { |schedule| schedule.user_ids.include?(user.id) }
+  end)
   scope :customed, -> { where(customed: true) }
+  scope :for_student, -> { where(for_student: true) }
   scope :not_customed, -> { where(customed: false) }
+  scope :private_ones, -> { where(private: true) }
+  scope :public_ones, -> { where(private: false) }
 
   def author
     users.where('schedule_users.author = true').take
