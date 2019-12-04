@@ -11,8 +11,6 @@ en:
           button_text: Preferences
       schedules:
         add_schedule:
-          no_schedules_header: "You have no schedules available to add\nNevertheless, you can create new schedule"
-          header: Available schedules
           create_new_schedule:
             name: create_schedule
             button_text: + Create new schedule
@@ -105,6 +103,12 @@ en:
     'no': 'No'
     'yes': 'Yes'
   layouts:
+    menus:
+      add_schedule:
+        header: '*Add schedule*'
+      schedule:
+        additional_info: '%{info}'
+        header: '*%{schedule_name}* `#%{schedule_id}`'
     schedule:
       title: "*%{schedule_name}* `#%{schedule_id}`\n%{schedule_additional_info}"
       events:
