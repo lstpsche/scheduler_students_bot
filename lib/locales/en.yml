@@ -117,7 +117,9 @@ en:
       back:
         name: back
         button_text: <-- Back
-    help: "/menu - show main menu\n/help - show this message"
+    texts:
+      coming_soon: Coming soon...
+      help: "/menu - show main menu\n/help - show this message"
     'no': 'No'
     'yes': 'Yes'
   layouts:
