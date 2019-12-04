@@ -29,5 +29,13 @@ module Constants
     def schedule_callback
       'schedule-%{schedule_id}__%{action}'
     end
+
+    def schedule_setting_callback
+      'schedule_setting-%{schedule_id}__%{option_name}__%{action}'
+    end
+
+    def schedule_settings_callback
+      'schedule_settings-%{schedule_id}__%{setting_name}__show'
+    end
   end
 end

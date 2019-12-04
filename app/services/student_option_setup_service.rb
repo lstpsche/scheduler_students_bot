@@ -10,9 +10,8 @@ module Services
 
     # 'initialize' is in base
     def initialize(bot:, user:)
-      super do
-        @settings = user.student_settings
-      end
+      super
+      @settings = user.student_settings
     end
 
     def setup_all
