@@ -130,10 +130,10 @@ en:
         additional_info: '%{info}'
         header: '*%{schedule_name}* `#%{schedule_id}`'
     schedule:
-      title: "*%{schedule_name}* `#%{schedule_id}`\n%{schedule_additional_info}"
       events:
         weekday: "*%{weekday}*:\n"
-        event: "*%{time}*: %{info} _%{additional_info}_\n"
+        event: "*%{time}*: %{info} _(%{additional_info})_\n"
+      title: '*%{schedule_name}* `#%{schedule_id}`'
   shared:
     settings:
       not_set: Not set

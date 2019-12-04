@@ -44,15 +44,27 @@ class Schedule < ActiveRecord::Base
 end
 
 class DecoratedSchedule < Schedule
-  def view
-    title + decorated_events
+  def additional_info
+    super.presence
+  end
+
+  def decorated_events
+    events_hashed_by_weekday.inject('') do |text, (weekday, events)|
+      text + decorated_weekday(weekday, events)
+    end
+  end
+
+  def settings
+    Constant.schedule_settings_list.map do |result, setting|
+      str_setting = setting.to_s
+      result.merge(name: str_setting, button_text: str_setting.capitalize, value: try(setting))
+    end
   end
 
   def title
     I18n.t('layouts.schedule.title',
            schedule_name: name,
-           schedule_id: id,
-           schedule_additional_info: decorated_additional_info
+           schedule_id: id
           )
   end
 
@@ -60,12 +72,6 @@ class DecoratedSchedule < Schedule
 
   def decorated_additional_info
     additional_info + "\n"
-  end
-
-  def decorated_events
-    events_hashed_by_weekday.inject('') do |text, (weekday, events)|
-      text + decorated_weekday(weekday, events)
-    end
   end
 
   def decorated_weekday(weekday, events)

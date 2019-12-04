@@ -5,7 +5,9 @@ module Decorators
     CONTEXT_TITLE = {
       'add_schedule': Schedules::AddSchedule,
       'all_schedules': Schedules::AllSchedules,
-      'create_schedule': Schedules::CreateSchedule
+      'create_schedule': Schedules::CreateSchedule,
+      'expanded_schedule': Schedules::ExpandedSchedule,
+      'short_schedule': Schedules::ShortSchedule
     }.with_indifferent_access
 
     # 'initialize' is in base
