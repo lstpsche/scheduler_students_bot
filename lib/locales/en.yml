@@ -39,18 +39,33 @@ en:
             button_text: <-- Back
         schedule:
           options:
-            show:
-              name: expand
-              button_text: Show schedule
             hide:
               name: hide
               button_text: Hide schedule
             pin:
               name: pin
               button_text: Pin
-            back:
-              name: back
-              button_text: <-- Back
+            settings:
+              name: settings
+              button_text: Options
+            show:
+              name: expand
+              button_text: Show schedule
+        schedule_setting:
+          options:
+            change_setting:
+              button_text: Change setting
+              name: setup
+        schedule_setting_text: '_%{setting_name}_: %{setting_value}'
+        schedule_settings:
+          header: Settings
+          options:
+            private:
+              button_text: Privacy
+              name: private
+              value:
+                'true': Private
+                'false': Public
     users:
       option:
         user_option_text:
@@ -101,6 +116,10 @@ en:
           button_text: Group
           text: What's your Group?
   common:
+    buttons:
+      back:
+        name: back
+        button_text: <-- Back
     help: "/menu - show main menu\n/help - show this message"
     'no': 'No'
     'yes': 'Yes'
@@ -110,6 +129,11 @@ en:
       events:
         weekday: "*%{weekday}*:\n"
         event: "*%{time}*: %{info} _%{additional_info}_\n"
+  shared:
+    settings:
+      not_set: Not set
+      setup_successful: Setting was set up successfully!
+      was_not_setup: Setting was not setup.
   weekdays:
     monday: monday
     tuesday: tuesday

@@ -36,6 +36,22 @@ module Helpers
       def call_back_schedule
         ::Actions::Features::Schedules::Schedule.new(bot: bot, user: user).back
       end
+
+      ################ Schedule Settings ###########################
+
+      def setup_schedule_setting(schedule, option_name)
+        ::Services::Schedules::ScheduleSettingSetupService.new(bot: bot, user: user, schedule: schedule)
+                                                          .setup_option(option_name)
+      end
+
+      def show_schedule_setting(schedule, option_name)
+        ::Actions::Features::Schedules::ScheduleSetting.new(bot: bot, user: user)
+                                                       .show(schedule: schedule, setting_name: option_name)
+      end
+
+      def show_schedule_settings(schedule_id)
+        ::Actions::Features::Schedules::ScheduleSettings.new(bot: bot, user: user).show(schedule_id: schedule_id)
+      end
     end
   end
 end
