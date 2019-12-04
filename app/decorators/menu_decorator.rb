@@ -7,11 +7,12 @@ module Decorators
       'all_schedules': Schedules::AllSchedules,
       'create_schedule': Schedules::CreateSchedule,
       'expanded_schedule': Schedules::ExpandedSchedule,
-      'short_schedule': Schedules::ShortSchedule,
       'main_menu': MainMenu,
       'option': Preferences::Option,
       'preferences': Preferences::Preferences,
-      'schedule_setting': Schedules::ScheduleSetting
+      'schedule_setting': Schedules::ScheduleSetting,
+      'schedule_settings': Schedules::ScheduleSettings,
+      'short_schedule': Schedules::ShortSchedule
     }.with_indifferent_access
 
     # 'initialize' is in base
