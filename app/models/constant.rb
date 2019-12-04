@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Constant
+  WEEKDAYS = %w[monday tuesday wednesday thursday friday saturday sunday].freeze
+
   class << self
     include Constants::Regexes
     include Constants::Options
@@ -15,14 +17,14 @@ class Constant
       ]
     end
 
-    def weekdays
-      %w[monday tuesday wednesday thursday friday saturday sunday]
-    end
-
     def translated_weekdays
       weekdays.map do |weekday|
         I18n.t(weekday, scope: 'weekdays')
       end
+    end
+
+    def back_button
+      Array.wrap(I18n.t('common.buttons.back'))
     end
 
     private

@@ -24,6 +24,10 @@ module Actions
 
         private
 
+        def find_schedule_by(id:)
+          @schedule = ::Schedule.find_by(id: id)
+        end
+
         def schedule_options(schedule)
           { text: schedule.name, name: schedule.id }
         end
