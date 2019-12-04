@@ -4,7 +4,8 @@ module Decorators
   class MenuDecorator < Base
     CONTEXT_TITLE = {
       'add_schedule': Schedules::AddSchedule,
-      'all_schedules': Schedules::AllSchedules
+      'all_schedules': Schedules::AllSchedules,
+      'create_schedule': Schedules::CreateSchedule
     }.with_indifferent_access
 
     # 'initialize' is in base
