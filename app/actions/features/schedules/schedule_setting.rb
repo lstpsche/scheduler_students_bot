@@ -32,6 +32,13 @@ module Actions
         end
 
         def message_text
+          Decorators::MenuDecorator.decorate(
+            { menu: 'schedule_setting', resource: @schedule },
+            text_to_decorate
+          )
+        end
+
+        def text_to_decorate
           resource = params.resource
 
           I18n.t('actions.features.schedules.schedule_setting_text') % {

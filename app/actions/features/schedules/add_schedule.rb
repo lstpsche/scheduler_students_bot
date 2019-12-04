@@ -49,15 +49,9 @@ module Actions
         end
 
         def message_text
-          @schedules.compact.present? ? schedules_present_message_text : no_schedules_message_text
-        end
-
-        def schedules_present_message_text
-          I18n.t('actions.features.schedules.add_schedule.header')
-        end
-
-        def no_schedules_message_text
-          I18n.t('actions.features.schedules.add_schedule.no_schedules_header')
+          Decorators::MenuDecorator.decorate(
+            menu: 'add_schedule'
+          )
         end
 
         def create_button_for_kb(schedule)
