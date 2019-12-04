@@ -10,7 +10,8 @@ module Decorators
       'short_schedule': Schedules::ShortSchedule,
       'main_menu': MainMenu,
       'option': Preferences::Option,
-      'preferences': Preferences::Preferences
+      'preferences': Preferences::Preferences,
+      'schedule_setting': Schedules::ScheduleSetting
     }.with_indifferent_access
 
     # 'initialize' is in base

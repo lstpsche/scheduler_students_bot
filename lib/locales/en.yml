@@ -134,6 +134,8 @@ en:
       schedule:
         additional_info: '%{info}'
         header: '*%{schedule_name}* `#%{schedule_id}`'
+      schedule_setting:
+        header: '*%{schedule_name}* `#%{schedule_id}`'
     schedule:
       events:
         weekday: "*%{weekday}*:\n"
