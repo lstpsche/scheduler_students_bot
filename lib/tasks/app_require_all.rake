@@ -53,6 +53,7 @@ namespace :app do
     require_all 'app/actions/features/schedules/base.rb'
     require_all 'app/actions/features/schedules/schedule/schedule.rb'
     require_all 'app/actions/features'
+    require_all 'app/actions'
     ## dialogs
     require_all 'app/dialogs'
     ## routers
