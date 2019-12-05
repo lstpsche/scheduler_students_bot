@@ -34,10 +34,10 @@ namespace :app do
     require_all 'app/services'
     ## handlers
     require_all 'app/handlers/base.rb'
-    require_all 'app/handlers/*.rb'
     require_all 'app/handlers/callbacks/base.rb'
     require_all 'app/handlers/callbacks'
     require_all 'app/handlers/text_commands'
+    require_all 'app/handlers'
     ## decorators
     require_all 'app/decorators/base.rb'
     require_all 'app/decorators/preferences/base.rb'
